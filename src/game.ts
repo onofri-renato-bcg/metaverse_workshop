@@ -1,6 +1,8 @@
 import { Wall } from "./wall"
 import { Door } from "./door"
 import { Sound } from "./sound"
+import { RotatorSystem } from "./rotator"
+import { nft } from "@dcl/crypto-scene-utils"
 
 // Base
 const base = new Entity()
@@ -38,23 +40,35 @@ wall_back.addComponent(brickMaterial)
 const jazzSound = new Sound(new AudioClip("sounds/jazz.mp3"), true, true, new Vector3(8, 0, 8))
 jazzSound.getComponent(AudioSource).volume = 1.0
 
-// const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)
+const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)
 
 // Door
-// const door = new Door(new GLTFShape("models/door.glb"))
-// door.setParent(facade)
-// door.addComponent(
-//   new OnPointerDown(
-//     () => {
-//       door.playDoorOpen()
-//       openDoorSound.getComponent(AudioSource).playOnce()
-//       jazzSound.getComponent(AudioSource).volume = 1.0
-//     },
-//     {
-//       button: ActionButton.PRIMARY,
-//       hoverText: "Enter Club",
-//       showFeedback: true,
-//     }
-//   )
-// )
+const door = new Door(new GLTFShape("models/door.glb"))
+door.setParent(facade)
+door.addComponent(
+  new OnPointerDown(
+    () => {
+      door.playDoorOpen()
+      openDoorSound.getComponent(AudioSource).playOnce()
+      jazzSound.getComponent(AudioSource).volume = 1.0
+    },
+    {
+      button: ActionButton.PRIMARY,
+      hoverText: "Enter Club",
+      showFeedback: true,
+    }
+  )
+)
 
+// const nft_man = new Entity()
+// nft_man.addComponent(new Transform({position: new Vector3(8, 2, 12), scale: new Vector3(2, 2, 1)}))
+// nft_man.addComponent(new NFTShape(
+//   "ethereum://0x495f947276749Ce646f68AC8c248420045cb7b5e/88777079088522037926244333246303946687107377434356165921969121296162456862721",
+//   {
+//     style: PictureFrameStyle.Gold_Edges,
+//     color: Color3.Yellow()
+//   }
+// ))
+
+// engine.addEntity(nft_man)
+// engine.addSystem(new RotatorSystem(nft_man))

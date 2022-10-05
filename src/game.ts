@@ -1,4 +1,5 @@
 import { Wall } from "./wall"
+import { Door } from "./door"
 import { Sound } from "./sound"
 
 // Base
@@ -25,14 +26,35 @@ const wall_back = new Wall(new Vector3(8, 0.05, 15), new Vector3(14, 10, 0.5))
 wall_back.getComponent(Transform).rotate(Vector3.Up(), 180)
 
 //Material
-// const brickTexture = new Texture("materials/brick_material.jpeg")
-// let brickMaterial = new BasicMaterial()
-// brickMaterial.texture = brickTexture
+const brickTexture = new Texture("materials/brick_material.jpeg")
+let brickMaterial = new BasicMaterial()
+brickMaterial.texture = brickTexture
 
-// wall_left.addComponent(brickMaterial)
-// wall_right.addComponent(brickMaterial)
-// wall_back.addComponent(brickMaterial)
+wall_left.addComponent(brickMaterial)
+wall_right.addComponent(brickMaterial)
+wall_back.addComponent(brickMaterial)
 
 //Background Music
-// const jazzSound = new Sound(new AudioClip("sounds/jazz.mp3"), true, true, new Vector3(8, 0, 8))
-// jazzSound.getComponent(AudioSource).volume = 1.0
+const jazzSound = new Sound(new AudioClip("sounds/jazz.mp3"), true, true, new Vector3(8, 0, 8))
+jazzSound.getComponent(AudioSource).volume = 1.0
+
+const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)
+
+// Door
+const door = new Door(new GLTFShape("models/door.glb"))
+door.setParent(facade)
+door.addComponent(
+  new OnPointerDown(
+    () => {
+      door.playDoorOpen()
+      openDoorSound.getComponent(AudioSource).playOnce()
+      jazzSound.getComponent(AudioSource).volume = 1.0
+    },
+    {
+      button: ActionButton.PRIMARY,
+      hoverText: "Enter Club",
+      showFeedback: true,
+    }
+  )
+)
+

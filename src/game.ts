@@ -38,23 +38,23 @@ wall_back.addComponent(brickMaterial)
 const jazzSound = new Sound(new AudioClip("sounds/jazz.mp3"), true, true, new Vector3(8, 0, 8))
 jazzSound.getComponent(AudioSource).volume = 1.0
 
-const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)
+// const openDoorSound = new Sound(new AudioClip("sounds/openDoor.mp3"), false)
 
 // Door
-const door = new Door(new GLTFShape("models/door.glb"))
-door.setParent(facade)
-door.addComponent(
-  new OnPointerDown(
-    () => {
-      door.playDoorOpen()
-      openDoorSound.getComponent(AudioSource).playOnce()
-      jazzSound.getComponent(AudioSource).volume = 1.0
-    },
-    {
-      button: ActionButton.PRIMARY,
-      hoverText: "Enter Club",
-      showFeedback: true,
-    }
-  )
-)
+// const door = new Door(new GLTFShape("models/door.glb"))
+// door.setParent(facade)
+// door.addComponent(
+//   new OnPointerDown(
+//     () => {
+//       door.playDoorOpen()
+//       openDoorSound.getComponent(AudioSource).playOnce()
+//       jazzSound.getComponent(AudioSource).volume = 1.0
+//     },
+//     {
+//       button: ActionButton.PRIMARY,
+//       hoverText: "Enter Club",
+//       showFeedback: true,
+//     }
+//   )
+// )
 
